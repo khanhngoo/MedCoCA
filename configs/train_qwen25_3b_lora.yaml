@@ -1,0 +1,47 @@
+model:
+  name_or_path: Qwen/Qwen2.5-3B-Instruct
+  torch_dtype: bfloat16
+  attn_implementation: flash_attention_2
+  load_in_4bit: true
+
+lora:
+  enabled: true
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+data:
+  prepared_train_path: artifacts/data/train.jsonl
+  prepared_eval_path: artifacts/data/eval.jsonl
+  max_prompt_length: 2048
+  max_completion_length: 512
+
+coca:
+  group_size: 8
+  clip_range: 0.2
+  invalid_confidence_reward: -1.0
+  include_step_by_step: true
+
+training:
+  output_dir: artifacts/checkpoints/qwen25-3b-coca-medical
+  seed: 42
+  learning_rate: 1.0e-6
+  weight_decay: 0.0
+  train_batch_size: 1
+  gradient_accumulation_steps: 16
+  max_steps: 1000
+  policy_epochs_per_rollout: 1
+  logging_steps: 10
+  save_steps: 100
+  temperature: 1.0
+  top_p: 1.0
+  do_sample: true
+  use_cache: false

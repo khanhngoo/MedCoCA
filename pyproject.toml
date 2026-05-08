@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coca-medical-qa"
+version = "0.1.0"
+description = "Confidence-first CoCA training and evaluation for MedQA and PubMedQA."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate",
+    "bitsandbytes",
+    "datasets",
+    "evaluate",
+    "ipykernel",
+    "ipywidgets",
+    "jupyter",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "peft",
+    "pyarrow",
+    "pyyaml",
+    "scikit-learn",
+    "seaborn",
+    "torch",
+    "tqdm",
+    "transformers",
+    "trl",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

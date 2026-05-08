@@ -1,0 +1,23 @@
+datasets:
+  medqa:
+    dataset_id: GBaker/MedQA-USMLE-4-options
+    train_split: train
+    eval_split: test
+    include_in_training: true
+  pubmedqa:
+    dataset_id: qiaojin/PubMedQA
+    train_configs:
+      - pqa_artificial
+      - pqa_labeled
+    eval_configs:
+      - pqa_labeled
+    unlabeled_configs:
+      - pqa_unlabeled
+    split: train
+    include_unlabeled_for_training: false
+
+preprocessing:
+  max_context_chars: 6000
+  max_question_chars: 3000
+  add_engineered_features: true
+  seed: 42
